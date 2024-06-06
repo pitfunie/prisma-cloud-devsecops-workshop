@@ -1,0 +1,26 @@
+# Yor is another open source tool that can be used for tagging and tracing IaC resources 
+# from code to cloud. For example, yor can be used to add git metadata and a unique hash 
+# to a terraform resource; this can be used to better manage resource lifecycles, improve 
+# change management, and ultimately to help tie code defintions to runtime configurations.
+
+
+name: IaC tag and trace
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  yor:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout repo
+        with:
+          fetch-depth: 0
+      - name: Run yor action
+        uses: bridgecrewio/yor-action@main
+
